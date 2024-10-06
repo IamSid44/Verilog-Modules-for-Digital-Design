@@ -1,0 +1,44 @@
+$date
+	Thu Oct  3 22:02:19 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module RSFF_Testbench $end
+$scope module uut $end
+$var wire 1 ! R $end
+$var wire 1 " S $end
+$var reg 1 # Not_Q $end
+$var reg 1 $ Q $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+x$
+x#
+0"
+0!
+$end
+#20000
+0#
+1$
+1"
+#40000
+1#
+0$
+0"
+1!
+#60000
+x#
+z$
+1"
+#80000
+0"
+0!

@@ -1,0 +1,40 @@
+$date
+	Wed Oct  2 15:21:04 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module Demux1x2_Testbench $end
+$scope module uut $end
+$var wire 1 ! en $end
+$var wire 1 " en_not $end
+$var wire 1 # in $end
+$var wire 2 $ y [1:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 $
+0#
+1"
+0!
+$end
+#5000
+b1 $
+1#
+#10000
+0"
+b0 $
+1!
+0#
+#15000
+b10 $
+1#
+#20000

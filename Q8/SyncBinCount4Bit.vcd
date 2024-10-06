@@ -1,0 +1,143 @@
+$date
+	Fri Oct  4 21:06:01 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module SyncBinCount4Bit_Testbench $end
+$scope module uut $end
+$var wire 1 ! Clk $end
+$var wire 1 " Cnt $end
+$var wire 1 # Rst $end
+$var wire 4 $ Inter [3:0] $end
+$var wire 4 % Count [3:0] $end
+$var parameter 32 & N $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b100 &
+$end
+#0
+$dumpvars
+b0 %
+b0 $
+0#
+0"
+0!
+$end
+#5000
+b1 $
+1"
+#6000
+1!
+#10000
+b0 $
+0"
+1#
+#11000
+0!
+#15000
+b1 $
+1"
+#16000
+b11 $
+b1 %
+1!
+#21000
+0!
+#26000
+b1 $
+b10 %
+1!
+#31000
+0!
+#36000
+b111 $
+b11 %
+1!
+#41000
+0!
+#46000
+b1 $
+b100 %
+1!
+#51000
+0!
+#56000
+b11 $
+b101 %
+1!
+#61000
+0!
+#66000
+b1 $
+b110 %
+1!
+#71000
+0!
+#76000
+b1111 $
+b111 %
+1!
+#81000
+0!
+#86000
+b1 $
+b1000 %
+1!
+#91000
+0!
+#96000
+b11 $
+b1001 %
+1!
+#101000
+0!
+#106000
+b1 $
+b1010 %
+1!
+#111000
+0!
+#116000
+b111 $
+b1011 %
+1!
+#121000
+0!
+#126000
+b1 $
+b1100 %
+1!
+#131000
+0!
+#136000
+b11 $
+b1101 %
+1!
+#141000
+0!
+#146000
+b1 $
+b1110 %
+1!
+#151000
+0!
+#156000
+b1111 $
+b1111 %
+1!
+#161000
+0!
+#166000
+b1 $
+b0 %
+1!
+#171000
+0!
+#175000

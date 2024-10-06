@@ -1,0 +1,52 @@
+$date
+	Wed Oct  2 16:10:57 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module Decoder2x4_Testbench $end
+$scope module uut $end
+$var wire 1 ! en $end
+$var wire 2 " in [1:0] $end
+$var wire 4 # out [3:0] $end
+$var wire 2 $ DecodedInA [1:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 $
+b0 #
+b0 "
+0!
+$end
+#5000
+b1 "
+#10000
+b10 "
+#15000
+b11 "
+#20000
+b1 #
+b1 $
+1!
+b0 "
+#25000
+b100 #
+b10 $
+b1 "
+#30000
+b1 $
+b10 #
+b10 "
+#35000
+b1000 #
+b10 $
+b11 "
+#40000
