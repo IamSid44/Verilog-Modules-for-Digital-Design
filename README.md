@@ -6,4 +6,20 @@ Q1 -> Gates
 
 Q2 -> Logic Functions
 
-Q3 -> MUUX, DEMUX, Decoder, Encoder
+Q3 -> MUX, DEMUX, Decoder, Encoder
+
+Q4 -> Adders
+
+Q5 -> Flip FLops
+
+Q6 -> Universal Shift Register
+
+Q7 -> Serial Adder
+
+Q8 -> Counters
+
+Q9 -> Sequential Circuit
+
+Q10 -> Finite State machines
+
+Q11 -> Sequential Circuit
