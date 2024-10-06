@@ -2,7 +2,7 @@
 
 `include "TFF.v"
 
-// COnsidering A and B as the outputs
+// Considering A and B as the outputs
 module Cir9b (input Clk, input Rst, output Aout, output Bout);
 
     wire Not_Aout, Not_Bout;

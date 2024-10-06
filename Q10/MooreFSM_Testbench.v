@@ -18,6 +18,11 @@ module MooreFSM_Testbench;
 
     initial
     begin
+        $monitor("Time=%0t, x=%b, y=%b", $time, x, y);
+    end
+
+    initial
+    begin
         $dumpfile("MooreFSM.vcd");
         $dumpvars(1, uut);
         

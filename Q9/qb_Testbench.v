@@ -17,6 +17,12 @@ module qb_Testbench;
     end
 
     initial
+    
+    begin
+        forever #10 $monitor("A = %b, B = %b", A, B);
+    end
+
+    initial
     begin
         $dumpfile("qb.vcd");
         $dumpvars(0, qb_Testbench);

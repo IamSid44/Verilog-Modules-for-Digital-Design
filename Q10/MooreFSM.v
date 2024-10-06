@@ -1,4 +1,4 @@
-// Outpu doesn't depend on input
+// Output doesn't depend on input
 `timescale 1ns / 1ps
 
 module MooreFSM (input x, input Clk, input Clr, output reg y);

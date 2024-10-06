@@ -18,6 +18,11 @@ module MealyFSM_Testbench;
 
     initial
     begin
+        $monitor("Time=%0t, x=%b, y=%b", $time, x, y);
+    end
+
+    initial
+    begin
         $dumpfile("MealyFSM.vcd");
         $dumpvars(1, uut);
         

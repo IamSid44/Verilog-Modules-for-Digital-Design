@@ -3,17 +3,22 @@
 module qa_Testbench();
 
     reg x, y, A, B, Clk, Clr;
-    wire z;
+    wire z, Aout, Bout;
 
-    Cir uut(.x(x), .y(y), .Clk(Clk), .Rst(Clr), .z(z), .TestA(A), .TestB(B));
+    Cir uut(.x(x), .y(y), .Clk(Clk), .Rst(Clr), .z(z), .TestA(A), .TestB(B), .Aout(Aout), .Bout(Bout));
 
     initial
-    begin
+    begin   
         Clk = 0;
         Clr = 0;
         #1
         Clr = 1;
         forever #5 Clk = ~Clk;
+    end
+
+    initial
+    begin
+        forever #10 $monitor("A = %b, B = %b, x = %b, y = %b, z = %b", A, B, x, y, z);
     end
 
     initial
