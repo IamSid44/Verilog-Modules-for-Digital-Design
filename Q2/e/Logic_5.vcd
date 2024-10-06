@@ -1,0 +1,134 @@
+$date
+	Tue Oct  1 17:12:37 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module Logic_5_Test $end
+$scope module uut $end
+$var wire 1 ! a $end
+$var wire 1 " b $end
+$var wire 1 # c $end
+$var wire 1 $ d $end
+$var wire 1 % p $end
+$var wire 1 & q $end
+$var wire 1 ' r $end
+$var wire 1 ( s $end
+$var wire 1 ) t $end
+$var wire 1 * u $end
+$var wire 1 + v $end
+$var wire 1 , w $end
+$var wire 1 - x $end
+$var wire 1 . y $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+1.
+0-
+1,
+1+
+0*
+1)
+1(
+1'
+1&
+1%
+0$
+0#
+0"
+0!
+$end
+#5000
+1-
+0,
+1!
+#10000
+0.
+0-
+1*
+1,
+0)
+0!
+1"
+#15000
+1!
+#20000
+0*
+1.
+1-
+1)
+0%
+0(
+0+
+0!
+0"
+1#
+#25000
+0,
+1!
+#30000
+1*
+1,
+0)
+0!
+1"
+#35000
+1!
+#40000
+0.
+0-
+1)
+1%
+1(
+1+
+0'
+0!
+0"
+0#
+1$
+#45000
+1!
+#50000
+0)
+0!
+1"
+#55000
+1.
+1-
+0&
+1!
+#60000
+0.
+0-
+1&
+1)
+0%
+0!
+0"
+1#
+#65000
+1!
+#70000
+0)
+0!
+1"
+#75000
+1!
+#80000
+1.
+0*
+1)
+1%
+1'
+0!
+0"
+0#
+0$
