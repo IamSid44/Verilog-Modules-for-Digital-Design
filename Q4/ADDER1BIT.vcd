@@ -1,0 +1,102 @@
+$date
+	Wed Oct  2 21:13:26 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module FullAdder1Bit_Testbench $end
+$scope module uut $end
+$var wire 1 ! Carry $end
+$var wire 1 " Sum $end
+$var wire 1 # a $end
+$var wire 1 $ andAB $end
+$var wire 1 % andAC $end
+$var wire 1 & andBC $end
+$var wire 1 ' b $end
+$var wire 1 ( c $end
+$var wire 1 ) not_a $end
+$var wire 1 * not_b $end
+$var wire 1 + not_c $end
+$var wire 1 , part1 $end
+$var wire 1 - part2 $end
+$var wire 1 . part3 $end
+$var wire 1 / part4 $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+0/
+0.
+0-
+0,
+1+
+1*
+1)
+0(
+0'
+0&
+0%
+0$
+0#
+0"
+0!
+$end
+#5000
+1"
+0+
+1-
+1(
+#10000
+0*
+1/
+1+
+0-
+1'
+0(
+#15000
+0"
+0/
+1!
+0+
+1&
+1(
+#20000
+1"
+0!
+0)
+1,
+1*
+1+
+0&
+1#
+0'
+0(
+#25000
+0"
+0,
+1!
+0+
+1%
+1(
+#30000
+0*
+1$
+1+
+0%
+1'
+0(
+#35000
+1"
+0+
+1.
+1&
+1%
+1(
+#40000

@@ -1,0 +1,136 @@
+$date
+	Sat Oct  5 13:59:06 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module qb_Testbench $end
+$var wire 1 ! B $end
+$var wire 1 " A $end
+$var reg 1 # Clk $end
+$var reg 1 $ Clr $end
+$scope module uut $end
+$var wire 1 % Ain $end
+$var wire 1 & Bin $end
+$var wire 1 # Clk $end
+$var wire 1 $ Rst $end
+$var wire 1 ' Not_Bout $end
+$var wire 1 ( Not_Aout $end
+$var wire 1 ! Bout $end
+$var wire 1 " Aout $end
+$scope module A $end
+$var wire 1 # Clk $end
+$var wire 1 $ Reset $end
+$var wire 1 % T $end
+$var reg 1 ( Not_Q $end
+$var reg 1 " Q $end
+$upscope $end
+$scope module B $end
+$var wire 1 # Clk $end
+$var wire 1 $ Reset $end
+$var wire 1 & T $end
+$var reg 1 ' Not_Q $end
+$var reg 1 ! Q $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+0(
+0'
+1&
+1%
+0$
+0#
+1"
+1!
+$end
+#1000
+1$
+#6000
+0%
+1'
+0!
+1(
+0"
+1#
+#11000
+0#
+#16000
+1%
+0'
+1!
+1#
+#21000
+0#
+#26000
+0&
+1'
+0!
+0(
+1"
+1#
+#31000
+0#
+#36000
+1&
+0%
+1(
+0"
+1#
+#41000
+0#
+#46000
+1%
+0'
+1!
+1#
+#51000
+0#
+#56000
+0&
+0(
+1"
+1'
+0!
+1#
+#61000
+0#
+#66000
+1&
+0%
+1(
+0"
+1#
+#71000
+0#
+#76000
+1%
+0'
+1!
+1#
+#81000
+0#
+#86000
+0&
+1'
+0!
+0(
+1"
+1#
+#91000
+0#
+#96000
+1&
+0%
+1(
+0"
+1#
+#100000

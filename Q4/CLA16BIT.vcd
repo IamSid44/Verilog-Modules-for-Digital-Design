@@ -1,0 +1,41 @@
+$date
+	Thu Oct  3 17:09:21 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module CLANBit_Testbench $end
+$scope module uut $end
+$var wire 1 ! Cin $end
+$var wire 16 " In1 [15:0] $end
+$var wire 16 # In2 [15:0] $end
+$var wire 16 $ Sum [15:0] $end
+$var wire 17 % Inter [16:0] $end
+$var wire 1 & Carry $end
+$var parameter 32 ' Num $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b10000 '
+$end
+#0
+$dumpvars
+0&
+b0zzz0zzz0zzz0zzz0 %
+b1000010101000000 $
+b11010000100000 #
+b101000100100000 "
+0!
+$end
+#10000
+1&
+b1zzz1zzz1zzz1zzz0 %
+b110100001011010 $
+b1110100001011011 #
+b111111111111111 "
+#20000
