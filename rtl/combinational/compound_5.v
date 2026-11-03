@@ -7,7 +7,7 @@
 // (minterm 4 is a don't care that is left at 0).
 //
 // Each product term is a NAND, and a final NAND ORs them together.
-// A 1-input NAND is used below as an inverter.
+// A NAND with its inputs tied together is used below as an inverter.
 // -----------------------------------------------------------------------------
 `ifndef COMPOUND_5_V
 `define COMPOUND_5_V
@@ -22,9 +22,9 @@ module compound_5 (
     wire b_n, c_n, d_n;
     wire p, q, r;
 
-    nand (b_n, b);
-    nand (c_n, c);
-    nand (d_n, d);
+    nand (b_n, b, b);
+    nand (c_n, c, c);
+    nand (d_n, d, d);
 
     nand (p, b_n, d_n);      // (B'D')'
     nand (q, c,   d_n);      // (CD')'

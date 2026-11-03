@@ -1,16 +1,19 @@
 // -----------------------------------------------------------------------------
-// cla_16bit - 16-bit adder built from four cla_4bit blocks
+// cla_16bit - 16-bit two-level carry-lookahead adder
 //
 //   {cout, sum} = a + b + cin
 //
-// Carries are looked ahead inside each 4-bit block; the carry between blocks
-// ripples. (A fully two-level CLA would add a second lookahead unit across the
-// blocks.)
+// Level 1: four cla_4bit blocks look ahead across their own four bits and
+//          report a group propagate / generate (pg, gg).
+// Level 2: one cla_lookahead_4 unit combines the four (pg, gg) pairs to produce
+//          the carry into every block at once, so the carry never has to
+//          ripple through the blocks.
 // -----------------------------------------------------------------------------
 `ifndef CLA_16BIT_V
 `define CLA_16BIT_V
 
 `include "rtl/arithmetic/cla_4bit.v"
+`include "rtl/arithmetic/cla_lookahead_4.v"
 
 `timescale 1ns / 1ps
 
@@ -22,20 +25,27 @@ module cla_16bit (
     output        cout
 );
 
-    wire [4:0] carry;   // carry[i] is the carry into block i; carry[4] is cout
-
-    assign carry[0] = cin;
-    assign cout     = carry[4];
+    wire [3:0] block_pg, block_gg;      // group propagate / generate of each block
+    wire [3:0] block_c;                 // block_c[i] = carry out of block i
+    wire [3:0] block_cin = {block_c[2:0], cin};
 
     genvar i;
     generate
         for (i = 0; i < 4; i = i + 1) begin : block
             cla_4bit adder (
-                .a(a[4*i +: 4]), .b(b[4*i +: 4]), .cin(carry[i]),
-                .sum(sum[4*i +: 4]), .cout(carry[i + 1])
+                .a(a[4*i +: 4]), .b(b[4*i +: 4]), .cin(block_cin[i]),
+                .sum(sum[4*i +: 4]), .cout(),
+                .pg(block_pg[i]), .gg(block_gg[i])
             );
         end
     endgenerate
+
+    cla_lookahead_4 lookahead (
+        .p(block_pg), .g(block_gg), .cin(cin),
+        .c(block_c), .pg(), .gg()
+    );
+
+    assign cout = block_c[3];
 
 endmodule
 

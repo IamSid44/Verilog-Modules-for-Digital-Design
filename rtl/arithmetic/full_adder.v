@@ -1,8 +1,11 @@
 // -----------------------------------------------------------------------------
-// full_adder - 1-bit full adder (gate level)
+// full_adder - 1-bit full adder (gate level, two half adders and an OR)
 //
-//   sum  = a ^ b ^ cin
-//   cout = ab + bc + ac     (majority of a, b, cin)
+//   p    = a ^ b                 (propagate)
+//   sum  = p ^ cin
+//   cout = a.b + p.cin           (same as the majority of a, b, cin)
+//
+// Sharing p between sum and cout uses only 2-input gates.
 // -----------------------------------------------------------------------------
 `ifndef FULL_ADDER_V
 `define FULL_ADDER_V
@@ -17,14 +20,14 @@ module full_adder (
     output cout
 );
 
-    wire ab, bc, ac;
+    wire p, g, pc;
 
-    xor (sum, a, b, cin);
+    xor (p,   a, b);
+    xor (sum, p, cin);
 
-    and (ab, a, b);
-    and (bc, b, cin);
-    and (ac, a, cin);
-    or  (cout, ab, bc, ac);
+    and (g,  a, b);
+    and (pc, p, cin);
+    or  (cout, g, pc);
 
 endmodule
 

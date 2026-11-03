@@ -7,7 +7,7 @@
 // C does not appear in the function; the port is kept so the module has the
 // full F(A,B,C,D) interface.
 //
-// A 1-input-style NAND (both inputs tied) is used as an inverter.
+// A NAND with its inputs tied together is used as an inverter.
 // -----------------------------------------------------------------------------
 `ifndef COMPOUND_4_V
 `define COMPOUND_4_V

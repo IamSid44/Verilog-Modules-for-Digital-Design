@@ -1,4 +1,5 @@
-// Self-checking testbench for full_adder, ripple_adder_4bit/16bit, cla_4bit/16bit.
+// Self-checking testbench for full_adder, ripple_adder_4bit/16bit, cla_4bit/16bit
+// (cla_16bit also exercises cla_lookahead_4).
 //   - full_adder and both 4-bit adders: exhaustive.
 //   - both 16-bit adders: corner cases plus 5000 pseudo-random vectors.
 // Expected values come from Verilog's own + operator.
@@ -18,6 +19,7 @@ module adder_tb;
     wire        fa_sum, fa_cout;
     wire [3:0]  rca4_sum, cla4_sum;
     wire        rca4_cout, cla4_cout;
+    wire        cla4_pg, cla4_gg;
 
     // 16-bit stimulus
     reg  [15:0] a16, b16;
@@ -29,7 +31,8 @@ module adder_tb;
 
     full_adder        fa     (.a(a4[0]), .b(b4[0]), .cin(cin4), .sum(fa_sum), .cout(fa_cout));
     ripple_adder_4bit rca4   (.a(a4), .b(b4), .cin(cin4), .sum(rca4_sum), .cout(rca4_cout));
-    cla_4bit          cla4   (.a(a4), .b(b4), .cin(cin4), .sum(cla4_sum), .cout(cla4_cout));
+    cla_4bit          cla4   (.a(a4), .b(b4), .cin(cin4), .sum(cla4_sum), .cout(cla4_cout),
+                                .pg(cla4_pg), .gg(cla4_gg));
     ripple_adder_16bit rca16 (.a(a16), .b(b16), .cin(cin16), .sum(rca16_sum), .cout(rca16_cout));
     cla_16bit         cla16  (.a(a16), .b(b16), .cin(cin16), .sum(cla16_sum), .cout(cla16_cout));
 
@@ -46,6 +49,14 @@ module adder_tb;
                 errors = errors + 1;
                 $display("  FAIL cla_4bit: %0d + %0d + %b = %0d (expected %0d)",
                          a4, b4, cin4, {cla4_cout, cla4_sum}, expected);
+            end
+            // Group signals: gg = carry-out with cin = 0, pg = every bit propagates,
+            // and cout = gg + pg.cin.
+            if (cla4_gg !== ((a4 + b4) > 5'd15) || cla4_pg !== (&(a4 ^ b4)) ||
+                cla4_cout !== (cla4_gg | (cla4_pg & cin4))) begin
+                errors = errors + 1;
+                $display("  FAIL cla_4bit pg/gg: a=%0d b=%0d cin=%b pg=%b gg=%b cout=%b",
+                         a4, b4, cin4, cla4_pg, cla4_gg, cla4_cout);
             end
             if ({fa_cout, fa_sum} !== a4[0] + b4[0] + cin4) begin
                 errors = errors + 1;

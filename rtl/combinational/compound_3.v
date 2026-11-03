@@ -8,7 +8,7 @@
 //   v = (D + E)   = NAND(D', E')
 //   Y = NAND(t, u, v)
 //
-// A 1-input NAND is used below as an inverter.
+// A NAND with its inputs tied together is used below as an inverter.
 // -----------------------------------------------------------------------------
 `ifndef COMPOUND_3_V
 `define COMPOUND_3_V
@@ -23,10 +23,10 @@ module compound_3 (
     wire a_n, c_n, d_n, e_n;
     wire t, u, v;
 
-    nand (a_n, a);
-    nand (c_n, c);
-    nand (d_n, d);
-    nand (e_n, e);
+    nand (a_n, a, a);
+    nand (c_n, c, c);
+    nand (d_n, d, d);
+    nand (e_n, e, e);
 
     nand (t, a_n, b);
     nand (u, c_n, e_n);

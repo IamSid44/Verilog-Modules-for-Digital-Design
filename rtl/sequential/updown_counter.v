@@ -7,8 +7,9 @@
 //                  up=0, down=0    -> hold
 //   `up` has priority when both `up` and `down` are high.
 //
-// Stage i toggles when every lower bit is 1 (counting up) or every lower bit
-// is 0 (counting down).
+// Stage i toggles when counting up and every lower bit is 1, or when counting
+// down and every lower bit is 0:
+//   t[i] = go_up & (&count[i-1:0])  |  go_down & ~(|count[i-1:0])
 // -----------------------------------------------------------------------------
 `ifndef UPDOWN_COUNTER_V
 `define UPDOWN_COUNTER_V
@@ -27,21 +28,19 @@ module updown_counter #(
     output [N-1:0] count
 );
 
-    wire [N-1:0] up_chain;      // all lower bits are 1 (and counting up)
-    wire [N-1:0] down_chain;    // all lower bits are 0 (and counting down)
-    wire [N-1:0] t;
-
-    assign up_chain[0]   = up;
-    assign down_chain[0] = down & ~up;
+    wire         go_up   = up;
+    wire         go_down = down & ~up;
+    wire [N-1:0] t;                     // toggle enable of each stage
 
     genvar i;
     generate
         for (i = 0; i < N; i = i + 1) begin : stage
-            if (i > 0) begin : chain
-                assign up_chain[i]   = up_chain[i-1]   &  count[i-1];
-                assign down_chain[i] = down_chain[i-1] & ~count[i-1];
+            if (i == 0) begin : first
+                assign t[i] = go_up | go_down;
+            end else begin : upper
+                assign t[i] = (go_up   &  (&count[i-1:0]))
+                            | (go_down & ~(|count[i-1:0]));
             end
-            assign t[i] = up_chain[i] | down_chain[i];
             tff t_ff (.clk(clk), .rst_n(rst_n), .t(t[i]), .q(count[i]), .q_n());
         end
     endgenerate

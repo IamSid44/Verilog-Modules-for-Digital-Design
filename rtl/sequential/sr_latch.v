@@ -22,7 +22,7 @@ module sr_latch (
     output     q_n
 );
 
-    always @(s or r) begin
+    always @(*) begin
         if (s && r)
             q = 1'bx;
         else if (s)

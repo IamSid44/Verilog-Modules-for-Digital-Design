@@ -68,11 +68,12 @@ under "Uses" below and fix the `include` paths.
 
 | Module | Description | Uses |
 |---|---|---|
-| [`full_adder`](rtl/arithmetic/full_adder.v) | 1-bit full adder from gates | |
+| [`full_adder`](rtl/arithmetic/full_adder.v) | 1-bit full adder from gates (two half adders and an OR) | |
 | [`ripple_adder_4bit`](rtl/arithmetic/ripple_adder_4bit.v) | 4-bit ripple-carry adder | `full_adder` |
 | [`ripple_adder_16bit`](rtl/arithmetic/ripple_adder_16bit.v) | 16-bit ripple-carry adder (4 × 4-bit) | `ripple_adder_4bit` |
-| [`cla_4bit`](rtl/arithmetic/cla_4bit.v) | 4-bit carry-lookahead adder | |
-| [`cla_16bit`](rtl/arithmetic/cla_16bit.v) | 16-bit adder from 4-bit CLA blocks | `cla_4bit` |
+| [`cla_lookahead_4`](rtl/arithmetic/cla_lookahead_4.v) | 4-position carry-lookahead unit (carries plus group propagate/generate) | |
+| [`cla_4bit`](rtl/arithmetic/cla_4bit.v) | 4-bit carry-lookahead adder | `cla_lookahead_4` |
+| [`cla_16bit`](rtl/arithmetic/cla_16bit.v) | 16-bit two-level carry-lookahead adder (4 × `cla_4bit` plus a second lookahead unit) | `cla_4bit`, `cla_lookahead_4` |
 
 ### Sequential: [`rtl/sequential/`](rtl/sequential)
 
@@ -125,15 +126,15 @@ reproducible) compared against a reference model.
 
 ## Notes and limitations
 
-- `cla_16bit` looks ahead within each 4-bit block, but the carry between blocks
-  ripples. A fully two-level CLA would add a lookahead unit across the blocks.
-- `ripple_counter` gates its clock with `en`, so change `en` only while `clk` is
-  low. In zero-delay simulation the ripple is not visible; add gate delays to
-  see the stages switch one after another.
+- `ripple_counter` is asynchronous: the stages switch one after another, so
+  `count` is only valid after the ripple settles. In zero-delay simulation this
+  is not visible; add gate delays to see it.
 - `sr_latch` and `srff` drive `x` on the forbidden input S = R = 1.
-- These are simulation models in the style of a teaching course. They are
-  written in synthesizable-style Verilog but have not been through a synthesis
-  flow.
+- All modules synthesize in Yosys. `sr_latch` becomes a latch (use `srff` on an
+  FPGA) and `ripple_counter` uses derived clocks (use `sync_counter` on an
+  FPGA). Nothing has been run through a vendor tool or on real hardware.
+- For design rationale, `wire` vs `reg`, `always` blocks, reset and clocking,
+  and how to put these on an FPGA, see [docs/design-notes.md](docs/design-notes.md).
 
 ## Where the exercises come from
 

@@ -29,6 +29,8 @@ module ones_zeros_detector (
     output out
 );
 
+    localparam [1:0] TARGET = 2'd2;   // counts saturate here; out needs both to reach it
+
     reg       one_q, zero_q;     // inputs one clock ago, for rising-edge detection
     reg [1:0] ones, zeros;       // counts of 1s and 0s, saturating at 2
 
@@ -44,12 +46,12 @@ module ones_zeros_detector (
         end else begin
             one_q  <= one;
             zero_q <= zero;
-            if (one_pulse  && ones  != 2'd2) ones  <= ones  + 2'd1;
-            if (zero_pulse && zeros != 2'd2) zeros <= zeros + 2'd1;
+            if (one_pulse  && ones  != TARGET) ones  <= ones  + 2'd1;
+            if (zero_pulse && zeros != TARGET) zeros <= zeros + 2'd1;
         end
     end
 
-    assign out = (ones == 2'd2) && (zeros == 2'd2);
+    assign out = (ones == TARGET) && (zeros == TARGET);
 
 endmodule
 

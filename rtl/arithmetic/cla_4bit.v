@@ -3,16 +3,21 @@
 //
 //   {cout, sum} = a + b + cin
 //
-// Instead of waiting for each carry to ripple, every carry is computed
-// directly from the per-bit propagate (p) and generate (g) signals:
+// Per-bit propagate and generate:   p[i] = a[i] ^ b[i]     g[i] = a[i] & b[i]
+// A cla_lookahead_4 unit turns them into every carry at the same time, and
+//   sum[i] = p[i] ^ (carry into bit i)
 //
-//   p[i] = a[i] ^ b[i]        g[i] = a[i] & b[i]
-//   c[i+1] = g[i] + p[i].c[i]            (expanded below so each carry only
-//                                         depends on p, g and cin)
-//   sum[i] = p[i] ^ c[i]
+// `pg` and `gg` are the block's group propagate / generate. They are not needed
+// to add four bits, but let several blocks be combined by a second lookahead
+// unit (see cla_16bit):
+//   gg = 1 : the block produces a carry-out by itself (cout = 1 even if cin = 0)
+//   pg = 1 : the block passes a carry-in straight through (cout = cin)
+//   cout = gg + pg.cin
 // -----------------------------------------------------------------------------
 `ifndef CLA_4BIT_V
 `define CLA_4BIT_V
+
+`include "rtl/arithmetic/cla_lookahead_4.v"
 
 `timescale 1ns / 1ps
 
@@ -21,24 +26,19 @@ module cla_4bit (
     input  [3:0] b,
     input        cin,
     output [3:0] sum,
-    output       cout
+    output       cout,
+    output       pg,
+    output       gg
 );
 
     wire [3:0] p = a ^ b;
     wire [3:0] g = a & b;
-    wire [4:0] c;       // c[i] is the carry into bit i; c[4] is cout
+    wire [3:0] c;                       // c[i] = carry out of bit i
 
-    assign c[0] = cin;
-    assign c[1] = g[0] | (p[0] & cin);
-    assign c[2] = g[1] | (p[1] & g[0]) | (p[1] & p[0] & cin);
-    assign c[3] = g[2] | (p[2] & g[1]) | (p[2] & p[1] & g[0])
-                       | (p[2] & p[1] & p[0] & cin);
-    assign c[4] = g[3] | (p[3] & g[2]) | (p[3] & p[2] & g[1])
-                       | (p[3] & p[2] & p[1] & g[0])
-                       | (p[3] & p[2] & p[1] & p[0] & cin);
+    cla_lookahead_4 lookahead (.p(p), .g(g), .cin(cin), .c(c), .pg(pg), .gg(gg));
 
-    assign sum  = p ^ c[3:0];
-    assign cout = c[4];
+    assign sum  = p ^ {c[2:0], cin};
+    assign cout = c[3];
 
 endmodule
 
