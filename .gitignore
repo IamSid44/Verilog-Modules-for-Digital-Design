@@ -1,0 +1,14 @@
+# Simulation output (regenerate with scripts/run_tests.sh)
+build/
+*.vvp
+*.vcd
+*.fst
+*.lxt
+*.lxt2
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
